@@ -33,6 +33,3 @@ def consumer():
         asyncio.run(consume(TOPIC_NAME))
     except KeyboardInterrupt as e:
         print("shutting down")
-        
-if __name__ == "__main__":
-    main()

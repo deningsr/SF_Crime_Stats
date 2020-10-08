@@ -3,6 +3,7 @@ import json
 from pyspark.sql import SparkSession
 from pyspark.sql.types import *
 import pyspark.sql.functions as psf
+import datetime
 
 
 # TODO Create a schema for incoming resources
@@ -30,7 +31,7 @@ def run_spark_job(spark):
     df = spark \
         .readStream \
         .format("kafka") \
-        .option("kafka.bootstrap.server","localhost:9092") \
+        .option("kafka.bootstrap.servers","localhost:9092") \
         .option("subscribe","police_calls") \
         .option("startingOffsets", "earliest") \
         .option("maxRatePerPartition", 1000) \
@@ -48,9 +49,10 @@ def run_spark_job(spark):
     service_table = kafka_df\
         .select(psf.from_json(psf.col('value'), schema).alias("DF"))\
         .select("DF.*")
-
+    
+    datetime.timestamp(service_table.select("call_date_time"))
     # TODO select original_crime_type_name and disposition
-        distinct_table = service_table.select("original_crime_type_name","call_date_time","disposition").distinct().withWatermark("call_date_time","30 minute")
+    distinct_table = service_table.select("original_crime_type_name","call_date_time","disposition").distinct().withWatermark("call_date_time","30 minute")
 
     # count the number of original crime type
     agg_df = distinct_table \

@@ -4,7 +4,7 @@
 
 ## Purpose
 
-#### This project draws data on San Fran crime incidents from Kaggle and outputs a structured stream to provide statistical analysis of the data. This analysis can be used by city officials to identify which areas are most afflicted by criems to actions can be taken.
+#### This project draws data on San Fran crime incidents from Kaggle and outputs a structured stream to provide statistical analysis of the data. This analysis can be used by city officials to identify which areas are most afflicted by crimes to actions can be taken.
 
 #### This analysis can be used to answer several questions such as:
 
@@ -14,7 +14,7 @@
 
 ## Running the Project
 
-* if using a <code>pip</code> environment, use <code>pip install -r requirements.txt</code> to install requirements
+* If using a <code>pip</code> environment, use <code>pip install -r requirements.txt</code> to install requirements
 
 * Use the commands below to start the Zookeeper and Kafka servers:
 

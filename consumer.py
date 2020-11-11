@@ -7,7 +7,7 @@ TOPIC_NAME = "com.police.dep.service"
 
 async def consume(topic_name):
     """Consumes data from the Kafka Topic"""
-    # TODO: Set the offset reset to earliest
+    # Set the offset reset to earliest
     consumer = Consumer(
         {
             "bootstrap.servers": BROKER_URL,
@@ -15,7 +15,7 @@ async def consume(topic_name):
             "auto.offset.reset": "earliest",
         }
     )
-    # TODO: Configure the on_assign callback
+    # Configure the on_assign callback
     consumer.subscribe([topic_name])
     while True:
         message = consumer.poll(1.0)
@@ -26,6 +26,7 @@ async def consume(topic_name):
         else:
             print(f"consumed message {message.key()}: {message.value()}")
         await asyncio.sleep(0.1)
+        
 def consumer():
     """Runs the exercise"""
     client = AdminClient({"bootstrap.servers": BROKER_URL})
